@@ -347,3 +347,77 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+
+/* Banner Animations */
+.animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-color-change {
+    animation: colorChange 8s infinite alternate;
+}
+
+@keyframes colorChange {
+    0% {
+        color: #f97316;
+    }
+
+    /* orange-400 */
+    50% {
+        color: #f59e0b;
+    }
+
+    /* orange-300 */
+    100% {
+        color: #ea580c;
+    }
+
+    /* orange-600 */
+}
+
+/* Hover effects */
+.hover\:shadow-orange-500\/30:hover {
+    box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.3);
+}
