@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     createSkillsStars();
     initCustomCursor();
     initPortfolioItems();
+    setupScrollAnimations();
+    highlightActiveNavLink();
 });
 
 function createStars() {
@@ -393,4 +395,75 @@ document.addEventListener('DOMContentLoaded', function () {
             preloader.style.display = 'none';
         }, 500);
     }, 3000); // Maximum wait time of 3 seconds
+});
+
+
+// Scroll fade-up animation for sections (excluding experience)
+function setupScrollAnimations() {
+    // Select all sections except #experience
+    const sections = document.querySelectorAll('section:not(#experience)');
+    
+    // Initially hide all sections except the first one
+    sections.forEach((section, index) => {
+        if (index > 0 || section.id === 'banner') {
+            section.classList.add('section-fade');
+        }
+    });
+
+    function checkScroll() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            // When the section is 20% from the top of the viewport
+            if (sectionTop < windowHeight * 0.8) {
+                section.classList.add('active');
+            }
+        });
+    }
+
+    // Run on initial load
+    checkScroll();
+    
+    // Run on scroll
+    window.addEventListener('scroll', checkScroll);
+}
+
+// Call this function when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupScrollAnimations();
+});
+
+// Highlight active nav link based on scroll position
+function highlightActiveNavLink() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#nav-links a, #mobile-menu a');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= (sectionTop - 300)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('text-orange-400');
+            link.classList.add('hover:text-orange-400');
+            
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('text-orange-400');
+                link.classList.remove('hover:text-orange-400');
+            }
+        });
+    });
+}
+
+// Call this function when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    highlightActiveNavLink();
 });
