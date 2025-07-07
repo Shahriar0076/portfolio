@@ -1,0 +1,337 @@
+/* Custom Cursor */
+.cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #f97316;
+    /* 🔶 orange */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+}
+
+.cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: #f97316;
+    /* 🔶 orange */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out;
+    /* add smooth movement */
+}
+
+
+
+/* Parallax Stars Background */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out, float-up var(--float-duration) linear infinite;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateZ(var(--z-depth));
+    }
+
+    100% {
+        transform: translateY(-100vh) translateZ(var(--z-depth));
+    }
+}
+
+/* Ensure content stays above stars */
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+/* Skills Stars */
+.skills-stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.skills-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: skills-float-up var(--float-duration) linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes skills-float-up {
+    0% {
+        transform: translateY(100vh) translateX(var(--x-pos));
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(var(--x-pos));
+    }
+}
+
+#portfolio .icons {
+    width: 10rem;
+    height: 10rem;
+    animation: float 3s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+    #portfolio .icons {
+        width: 5rem;
+        height: 5rem;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-10px);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+}
+
+.project-card .image-container {
+    overflow: hidden;
+    height: 18rem;
+    /* or your desired fixed height */
+    position: relative;
+}
+
+.project-card .image-container img {
+    transition: transform 8s linear;
+}
+
+.project-card:hover .image-container img {
+    transform: translateY(calc(-100% + 18rem));
+    /* scroll the image up */
+}
+
+.svg-white {
+    filter: brightness(0) invert(0.9) grayscale(0.2) opacity(0.8);
+}
+
+
+/* Add this to your existing style section */
+@keyframes timeline-line {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+.animate-timeline-line {
+    animation: timeline-line 1.5s ease-out forwards;
+}
+
+.hover\:shadow-orange-500\/10:hover {
+    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.1), 0 4px 6px -2px rgba(249, 115, 22, 0.05);
+}
+
+@keyframes float-1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(10px, 15px) rotate(5deg);
+    }
+}
+
+@keyframes float-2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-15px, 10px) rotate(-3deg);
+    }
+}
+
+@keyframes float-3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(5px, -10px) rotate(2deg);
+    }
+}
+
+@keyframes float-4 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-5px, 5px) rotate(-2deg);
+    }
+}
+
+.animate-float-1 {
+    animation: float-1 8s ease-in-out infinite;
+}
+
+.animate-float-2 {
+    animation: float-2 10s ease-in-out infinite;
+}
+
+.animate-float-3 {
+    animation: float-3 12s ease-in-out infinite;
+}
+
+.animate-float-4 {
+    animation: float-4 9s ease-in-out infinite;
+}
+
+.hover\:shadow-orange-500\/10:hover {
+    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.1), 0 4px 6px -2px rgba(249, 115, 22, 0.05);
+}
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+}
+
+.loader {
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.loader-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-inner:nth-child(2) {
+    border: 4px solid transparent;
+    border-bottom-color: #f97316;
+    animation: spin-reverse 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-reverse {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.loader-text {
+    color: #f97316;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
