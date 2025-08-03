@@ -421,3 +421,7 @@
 .hover\:shadow-orange-500\/30:hover {
     box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.3);
 }
+
+.spinner {
+    background-color: rgba(0, 0, 0, 0.6);
+}

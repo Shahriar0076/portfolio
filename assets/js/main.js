@@ -275,29 +275,42 @@ function initPortfolioItems() {
         loadMore();
 
         viewMoreBtn.addEventListener('click', loadMore);
+
+        // ✅ Just preload all images silently
+        const preloadPortfolioImages = () => {
+            const imageUrls = allItems.map(item => item.image);
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        };
+
+        preloadPortfolioImages(); // Call it here
     }
 
 
 function createProjectCard(item) {
     const card = document.createElement('div');
     card.className =
-                    'bg-dark-700/70 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition hover:scale-105 duration-300 project-card';
+        'bg-dark-700/70 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition hover:scale-105 duration-300 project-card';
 
-                // Determine href
-                const href = item.link !== "#" ? item.link : "javascript:void(0)";
-
-                // Only show button if link is not "#"
-                const viewButton = item.link !== "#"
-                    ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"
+    const href = item.link !== "#" ? item.link : "javascript:void(0)";
+    const viewButton = item.link !== "#"
+        ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"
             class="inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded transition">
             View Project
         </a>`
-                    : '';
+        : '';
 
-                card.innerHTML = `
+    const imageId = `img-${Math.random().toString(36).substr(2, 9)}`;
+
+    card.innerHTML = `
     <a href="${href}" ${item.link !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ''}>
-        <div class="image-container bg-dark-600">
-            <img src="${item.image}" alt="${item.title}" class="w-full object-cover">
+        <div class="image-container bg-dark-600 relative">
+            <div class="spinner absolute inset-0 flex items-center justify-center bg-dark-800/50 z-10">
+                <i class="fas fa-spinner fa-spin text-white text-2xl"></i>
+            </div>
+            <img id="${imageId}" src="${item.image}" alt="${item.title}" class="w-full object-cover opacity-0 transition-opacity duration-500">
         </div>
     </a>
     <div class="p-6">
@@ -309,8 +322,16 @@ function createProjectCard(item) {
     </div>
     `;
 
+    // Wait for image to load before removing spinner
+    const img = card.querySelector(`#${imageId}`);
+    img.addEventListener('load', () => {
+        img.classList.remove('opacity-0');
+        card.querySelector('.spinner')?.remove();
+    });
+
     return card;
 }
+
 
 
 
