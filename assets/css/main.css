@@ -425,3 +425,44 @@
 .spinner {
     background-color: rgba(0, 0, 0, 0.6);
 }
+/* =========================================================
+   Mobile navigation — rectangular full-width dropdown
+   Mobile only; desktop navbar styling is untouched.
+
+   Why: the <nav> carries Tailwind's `rounded-full` (pill).
+   The mobile menu lives inside it, so on mobile the opened
+   menu stretched the pill nav into an oval. These id-scoped
+   rules (higher specificity than Tailwind utilities) flatten
+   the header and turn the opened menu into a standard
+   square-cornered, full-width dropdown panel.
+   ========================================================= */
+@media (max-width: 767px) {
+    /* Header bar: full-width, square corners, flush to top */
+    #site-nav {
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 14px 20px;
+        border-radius: 0; /* kill the rounded-full pill */
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 1px solid rgba(55, 65, 81, 0.4);
+    }
+
+    /* Opened dropdown: rectangular panel under the header */
+    #mobile-menu {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border-radius: 0; /* no oval / no pill, ever */
+        border-top: 1px solid rgba(55, 65, 81, 0.4);
+        /* spacing/alignment handled by Tailwind: flex flex-col gap-4 py-5,
+           text-center + self-center on the Contact button */
+    }
+}

@@ -342,6 +342,27 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
     });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scroll-to-top');
+
+    const updateScrollTopBtn = () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.remove('hidden');
+        } else {
+            scrollTopBtn.classList.add('hidden');
+        }
+    };
+
+    window.addEventListener('scroll', updateScrollTopBtn, { passive: true });
+    updateScrollTopBtn(); // set correct state on load
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });
 
 
