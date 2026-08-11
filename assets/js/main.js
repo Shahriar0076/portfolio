@@ -98,6 +98,9 @@ function createSkillsStars() {
 }
 
 function initCustomCursor() {
+    // Skip custom cursor on touch devices (mobile/tablet)
+    if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
     const cursor = document.createElement('div');
     cursor.classList.add('cursor');
     document.body.appendChild(cursor);
@@ -199,7 +202,7 @@ function initPortfolioItems() {
                 link: "https://script.viserlab.com/cliplab"
             },
             {
-                title: "btcRR",
+                title: "BTCRR",
                 description: "Bitcoin Investment Platform",
                 image: "./assets/images/projects/btcrr.webp",
                 link: "https://script.viserlab.com/btcrr"
@@ -278,6 +281,24 @@ function initPortfolioItems() {
     }
 
 
+let imageScrollObserver = null;
+
+function getImageScrollObserver() {
+    if (!imageScrollObserver) {
+        // rootMargin shrinks the observation root to a zero-height line at the
+        // exact vertical center of the viewport, so the scroll only runs while
+        // the card spans the middle of the screen.
+        imageScrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const img = entry.target.querySelector('.image-container img');
+                if (img) img.classList.toggle('img-scroll', entry.isIntersecting);
+            });
+        }, { rootMargin: '-50% 0px -50% 0px' });
+    }
+    return imageScrollObserver;
+}
+
+
 function createProjectCard(item) {
     const card = document.createElement('div');
     card.className =
@@ -317,6 +338,12 @@ function createProjectCard(item) {
         img.classList.remove('opacity-0');
         card.querySelector('.spinner')?.remove();
     });
+
+    // On touch devices: auto-play the slow image scroll when the card reaches the middle of the viewport
+    const isTouch = !window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (isTouch) {
+        getImageScrollObserver().observe(card);
+    }
 
     return card;
 }

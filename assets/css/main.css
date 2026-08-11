@@ -28,6 +28,17 @@
     /* add smooth movement */
 }
 
+/* Hide custom cursor on touch devices */
+@media (hover: none), (pointer: coarse) {
+    .cursor, .cursor-dot {
+        display: none;
+    }
+
+    .project-card .image-container img {
+        transition: none;
+    }
+}
+
 
 
 /* Parallax Stars Background */
@@ -159,6 +170,18 @@
 .project-card:hover .image-container img {
     transform: translateY(calc(-100% + 18rem));
     /* scroll the image up */
+}
+
+/* Touch devices: auto-play the image scroll (class toggled by JS when the
+   card is centered in the screen) — pans up once to reveal the screenshot */
+.project-card .image-container img.img-scroll {
+    animation: image-scroll 10s linear forwards;
+}
+
+@keyframes image-scroll {
+    to {
+        transform: translateY(calc(-100% + 18rem));
+    }
 }
 
 .svg-white {
