@@ -153,103 +153,103 @@ function initPortfolioItems() {
             {
                 title: "Belyfted",
                 description: "Online Currency Exchange Platform (NextJS & Laravel)",
-                image: "./assets/images/projects/belyfted.png",
+                image: "./assets/images/projects/belyfted.webp",
                 link: "https://belyfted.com/"
             },
             {
                 title: "EventLab",
                 description: "Event Ticket Booking System",
-                image: "./assets/images/projects/eventlab.png",
+                image: "./assets/images/projects/eventlab.webp",
                 link: "https://script.viserlab.com/eventlab"
             },
             {
                 title: "PromptLab",
                 description: "AI Prompt Marketplace",
-                image: "./assets/images/projects/promptlab.png",
+                image: "./assets/images/projects/promptlab.webp",
                 link: "https://script.viserlab.com/promptlab"
             },
             {
                 title: "TreeVest",
                 description: "Tree Plantation Based Investment Platform",
-                image: "./assets/images/projects/treevest.png",
+                image: "./assets/images/projects/treevest.webp",
                 link: "https://script.viserlab.com/treevest"
             },
             {
                 title: "HungryHub",
                 description: "On Demand Food Ordering Platform",
-                image: "./assets/images/projects/hungryhub.png",
+                image: "./assets/images/projects/hungryhub.webp",
                 link: "https://script.viserlab.com/hungryhub"
             },
             {
                 title: "Agrivest",
                 description: "Agriculture and Livestock Investment Platform",
-                image: "./assets/images/projects/agrivest.png",
+                image: "./assets/images/projects/agrivest.webp",
                 link: "https://script.viserlab.com/agrivest"
             },
             {
                 title: "ServiceHUB",
                 description: "On Demand Service Provider Marketplace",
-                image: "./assets/images/projects/servicehub.png",
+                image: "./assets/images/projects/servicehub.webp",
                 link: "https://script.viserlab.com/servicehub"
             },
             {
                 title: "ClipLab",
                 description: "Professional Clipping Path Service Platform",
-                image: "./assets/images/projects/cliplab.png",
+                image: "./assets/images/projects/cliplab.webp",
                 link: "https://script.viserlab.com/cliplab"
             },
             {
                 title: "btcRR",
                 description: "Bitcoin Investment Platform",
-                image: "./assets/images/projects/btcrr.png",
+                image: "./assets/images/projects/btcrr.webp",
                 link: "https://script.viserlab.com/btcrr"
             },
             {
                 title: "Kothay",
                 description: "Sales Team with Real Time Tracking",
-                image: "./assets/images/projects/kothay.png",
+                image: "./assets/images/projects/kothay.webp",
                 link: "https://kothay.app/"
             },
             {
                 title: "Html CSS JS Template",
                 description: "Web Template",
-                image: "./assets/images/projects/html_bbq.png",
+                image: "./assets/images/projects/html_bbq.webp",
                 link: "https://tinyurl.com/jhb6fxbn"
             },
             {
                 title: "iMentor",
                 description: "Tutor Hiring Platform",
-                image: "./assets/images/projects/imentor.png",
+                image: "./assets/images/projects/imentor.webp",
                 link: "https://script.viserlab.com/imentor"
             },
             {
                 title: "Ladies Market",
                 description: "Ecommerce Website",
-                image: "./assets/images/projects/ladiesmarket.png",
+                image: "./assets/images/projects/ladiesmarket.webp",
                 link: "http://ladiesmarket.com.bd/en"
             },
             {
                 title: "Ladies Market Mobile App",
                 description: "Android/iOS Mobile App (React Native)",
-                image: "./assets/images/projects/ladiesmarket_mobile_app.png",
-                link: "#"
-            },
-            {
-                title: "Python Desktop Software",
-                description: "Desktop Software and Profit Analysis",
-                image: "./assets/images/projects/Python_Desktop_Software.png",
+                image: "./assets/images/projects/ladiesmarket_mobile_app.webp",
                 link: "#"
             },
             {
                 title: "NodeJS Real-Time Chat App",
                 description: "Chat Application (friend request, accept/reject/remove)",
-                image: "./assets/images/projects/NodeJSChatApp.png",
+                image: "./assets/images/projects/NodeJSChatApp.webp",
+                link: "#"
+            },
+            {
+                title: "Python Desktop Software",
+                description: "Desktop Software and Profit Analysis",
+                image: "./assets/images/projects/Python_Desktop_Software.webp",
                 link: "#"
             },
             {
                 title: "Python Selenium",
                 description: "Webscraping and Automation",
-                image: "./assets/images/projects/selenium.png",
+                image: "./assets/images/projects/selenium.webp",
                 link: "#"
             }
         ];
@@ -275,17 +275,6 @@ function initPortfolioItems() {
         loadMore();
 
         viewMoreBtn.addEventListener('click', loadMore);
-
-        // ✅ Just preload all images silently
-        const preloadPortfolioImages = () => {
-            const imageUrls = allItems.map(item => item.image);
-            imageUrls.forEach(url => {
-                const img = new Image();
-                img.src = url;
-            });
-        };
-
-        preloadPortfolioImages(); // Call it here
     }
 
 
@@ -310,7 +299,7 @@ function createProjectCard(item) {
             <div class="spinner absolute inset-0 flex items-center justify-center bg-dark-800/50 z-10">
                 <i class="fas fa-spinner fa-spin text-white text-2xl"></i>
             </div>
-            <img id="${imageId}" src="${item.image}" alt="${item.title}" class="w-full object-cover opacity-0 transition-opacity duration-500">
+            <img id="${imageId}" src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" class="w-full object-cover opacity-0 transition-opacity duration-500">
         </div>
     </a>
     <div class="p-6">
