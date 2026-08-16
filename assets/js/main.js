@@ -302,33 +302,39 @@ function getImageScrollObserver() {
 function createProjectCard(item) {
     const card = document.createElement('div');
     card.className =
-        'bg-dark-700/70 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition hover:scale-105 duration-300 project-card';
+        'project-card group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-dark-700/80 to-dark-800/90 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-orange-400/40 hover:shadow-xl hover:shadow-orange-500/10';
 
     const href = item.link !== "#" ? item.link : "javascript:void(0)";
     const viewButton = item.link !== "#"
         ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"
-            class="inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded transition">
+            class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all duration-300 shadow-md shadow-orange-600/20 hover:shadow-orange-500/40 group-hover:translate-x-0 translate-x-[-4px] hover:-translate-y-0.5">
             View Project
+            <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
         </a>`
         : '';
 
     const imageId = `img-${Math.random().toString(36).substr(2, 9)}`;
 
     card.innerHTML = `
-    <a href="${href}" ${item.link !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ''}>
-        <div class="image-container bg-dark-600 relative">
+    <a href="${href}" ${item.link !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block" aria-label="Open ${item.title}">
+        <div class="image-container relative overflow-hidden">
             <div class="spinner absolute inset-0 flex items-center justify-center bg-dark-800/50 z-10">
                 <i class="fas fa-spinner fa-spin text-white text-2xl"></i>
             </div>
             <img id="${imageId}" src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" class="w-full object-cover opacity-0 transition-opacity duration-500">
+            <div class="card-link-icon absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:bg-orange-500">
+                <i class="fas fa-arrow-up-right-from-square text-sm"></i>
+            </div>
         </div>
     </a>
-    <div class="p-6">
-        <a href="${href}" ${item.link !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-xl font-bold mb-2 inline-block hover:text-orange-400">
+    <div class="flex flex-col flex-grow p-5">
+        <a href="${href}" ${item.link !== "#" ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-xl font-bold mb-2 inline-block transition-colors duration-300 group-hover:text-orange-400">
             ${item.title}
         </a>
-        <p class="text-gray-400 mb-4">${item.description}</p>
-        ${viewButton}
+        <p class="text-gray-400 mb-5 leading-relaxed">${item.description}</p>
+        <div class="mt-auto">
+            ${viewButton}
+        </div>
     </div>
     `;
 
